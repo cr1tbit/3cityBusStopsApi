@@ -33,11 +33,15 @@ This info could be extracted from the API too, but I've found it way easier to j
 
 1. Go to https://ztm.gda.pl/ 
 2. Click on any bus that tends to visit your bus stop
-3. Click on the bus stop which you're interested in
+3. Click on the bus stop which you're interested in - please keep in mind that bus stop in each direction has its' own unique ID. In some cases, there might also exist separate entities for night bus stops. 
 4. The bus stop's ID may be located to the left of the bus stop's name.
 
 Example: https://ztm.gda.pl/rozklady/rozklad-199_20190518-11-1.html  
 This bus stop's ID is '1339'.
 
-Please note, right now this project should be considered "work-in-progress".
+## Please note, right now this project should be considered "work-in-progress".
+Important TODOs:
+
+- Caching API requests
+- Creating endpoint for multiple bus stops to be squashed into a single response
 
