@@ -28,3 +28,5 @@ API for raw text output - dw/dh parameters are target alphanumeric display size
 /disp?id=stopId&dw=16&dh=2
 ```
 
+Please note, right now this project should be considered "work-in-progress".
+
