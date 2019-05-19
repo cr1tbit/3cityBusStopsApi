@@ -10,7 +10,7 @@ The provided API allows user to create their own virtual Bus stop display, J̵͡
 
 ![HE COMES](https://i.ytimg.com/vi/jEyFTG4uJnQ/maxresdefault.jpg)
 
-(or better!)
+(or [better one](https://ztm.gda.pl/rozklady/rozklad-199_20190518-11-1.html)!)
 ## API description
 
 The app provides following endpoints:<br>
@@ -27,6 +27,17 @@ API for raw text output - dw/dh parameters are target alphanumeric display size
 ```
 /disp?id=stopId&dw=16&dh=2
 ```
+
+## Where do I get my bus stop's stopId?
+This info could be extracted from the API too, but I've found it way easier to just go into ZTM's official website and find info for the interesting stop manually.
+
+1. Go to https://ztm.gda.pl/ 
+2. Click on any bus that tends to visit your bus stop
+3. Click on the bus stop which you're interested in
+4. The bus stop's ID may be located to the left of the bus stop's name.
+
+Example: https://ztm.gda.pl/rozklady/rozklad-199_20190518-11-1.html  
+This bus stop's ID is '1339'.
 
 Please note, right now this project should be considered "work-in-progress".
 
