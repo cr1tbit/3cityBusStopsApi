@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request as f_request 
+from flask import abort, request as f_request 
 
 import sys,requests,json, pprint, datetime
 
@@ -22,7 +22,7 @@ def description():
 @app.route("/json")
 def apiSimpleJson():
     if f_request.args.get('id') is None:
-        return str([{'busNum':0,'direction':'idNotProvided','eta':'00:00'}])
+        abort(400)
     return str(
         getTruncatedJson(
             f_request.args.get('id'),
@@ -37,7 +37,7 @@ def apiSimpleJson():
 @app.route("/disp")
 def apiDisplay():
     if f_request.args.get('id') is None:
-        return "No stopId provided."
+        abort(400)
     return getStopDataString(
         f_request.args.get('id'),
         f_request.args.get('dw'),
@@ -54,7 +54,7 @@ def getStopDataJson(stopId:int):
 
         stopJSON = json.loads(stopData.content)['delay']
     except json.decoder.JSONDecodeError:
-        return [{'busNum':0,'direction':'NoBusData','eta':'00:00'}]
+        abort(400)
 
     #todo - This file is rather large and updates only once a day - some kind 
     #of caching would be quite beneficial    
