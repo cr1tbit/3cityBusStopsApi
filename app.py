@@ -5,6 +5,9 @@ import sys, requests, json, pprint, datetime
 
 app = Flask(__name__)
 
+ZTM_LINE_RESOURCE = "https://ckan.multimediagdansk.pl/dataset/c24aa637-3619-4dc2-a171-a23eec8f2172/resource/22313c56-5acf-41c7-a5fd-dc5dc72b3851/download/routes.json"
+ZTM_DELAY_RESOURCE = "http://ckan2.multimediagdansk.pl/delays?stopId="
+
 
 @app.route("/")
 def description():
@@ -47,9 +50,7 @@ def apiDisplay():
 def getStopDataJson(stopId: int):
 
     try:
-        stopData = requests.get(
-            "http://ckan2.multimediagdansk.pl/delays?stopId=" + str(stopId)
-        )
+        stopData = requests.get(ZTM_DELAY_RESOURCE + str(stopId))
 
         stopJSON = json.loads(stopData.content)["delay"]
     except json.decoder.JSONDecodeError:
@@ -57,9 +58,7 @@ def getStopDataJson(stopId: int):
 
     # todo - This file is rather large and updates only once a day - some kind
     # of caching would be quite beneficial
-    linesData = requests.get(
-        "https://ckan.multimediagdansk.pl/dataset/c24aa637-3619-4dc2-a171-a23eec8f2172/resource/22313c56-5acf-41c7-a5fd-dc5dc72b3851/download/routes.json"
-    )
+    linesData = requests.get(ZTM_LINES_RESOUCE)
 
     # The returned JSON must be querried with today's date.
     today = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -87,12 +86,7 @@ def getTruncatedJson(stopId: int, rowNum: int = None):
         return getStopDataJson(stopId)
 
 
-def getStopDataString(stopId: int, colNum: int, rowNum: int):
-    if colNum is None:
-        colNum = 16
-    if rowNum is None:
-        rowNum = 2
-
+def getStopDataString(stopId: int, colNum: int = 16, rowNum: int = 2):
     dataList = getTruncatedJson(stopId, rowNum)
     returnString = ""
     for l in dataList:
