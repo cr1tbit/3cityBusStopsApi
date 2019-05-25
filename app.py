@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import abort, request as f_request
+from flask import abort, jsonify, request as f_request
 
 import sys, requests, json, pprint, datetime
 
@@ -30,7 +30,7 @@ def description():
 def apiSimpleJson():
     if f_request.args.get("id") is None:
         abort(400)
-    return str(getTruncatedJson(f_request.args.get("id"), f_request.args.get("dh")))
+    return jsonify(getTruncatedJson(f_request.args.get("id"), f_request.args.get("dh")))
 
 
 # This API is dedicated for devices uncapable of handling JSON parsing
