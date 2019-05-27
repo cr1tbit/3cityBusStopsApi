@@ -23,11 +23,12 @@ def description():
 def apiSimpleJson():
     if f_request.args.get('id') is None:
         return str([{'busNum':0,'direction':'idNotProvided','eta':'00:00'}])
-    return str(
+    return json.dumps(
         getTruncatedJson(
             f_request.args.get('id'),
             f_request.args.get('dh')
-        )
+        ),
+        ensure_ascii = False
     )
 
 #This API is dedicated for devices uncapable of handling JSON parsing
@@ -51,7 +52,6 @@ def getStopDataJson(stopId:int):
         stopData = requests.get(
             'http://ckan2.multimediagdansk.pl/delays?stopId=' + str(stopId)
         )
-
         stopJSON = json.loads(stopData.content)['delay']
     except json.decoder.JSONDecodeError:
         return [{'busNum':0,'direction':'NoBusData','eta':'00:00'}]
