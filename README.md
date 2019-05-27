@@ -27,6 +27,7 @@ API for raw text output - dw/dh parameters are target alphanumeric display size
 ```
 /disp?id=stopId&dw=16&dh=2
 ```
+(dw parameter is not handled atm.)
 
 ## Where do I get my bus stop's stopId?
 This info could be extracted from the API too, but I've found it way easier to just go into ZTM's official website and find info for the interesting stop manually.
